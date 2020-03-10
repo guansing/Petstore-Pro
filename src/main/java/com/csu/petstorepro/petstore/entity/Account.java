@@ -1,0 +1,48 @@
+package com.csu.petstorepro.petstore.entity;
+
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author lgx
+ * @since 2020-03-10
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+public class Account implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private String userid;
+
+    private String email;
+
+    private String firstname;
+
+    private String lastname;
+
+    private String status;
+
+    private String addr1;
+
+    private String addr2;
+
+    private String city;
+
+    private String state;
+
+    private String zip;
+
+    private String country;
+
+    private String phone;
+
+
+}

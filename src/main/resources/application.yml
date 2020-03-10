@@ -1,0 +1,10 @@
+
+spring:
+  datasource:
+    #用宠物商店的数据库表
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/petstore?useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+server:
+  port: 8090
