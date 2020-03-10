@@ -1,13 +1,17 @@
 package com.csu.petstorepro;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootTest
-class PetstoreProApplicationTests {
-
-    @Test
-    void contextLoads() {
+@SpringBootApplication
+//@MapperScan("com.baomidou.mybatisplus.samples.quickstart.mapper")
+//@MapperScan("com.csu.jpetstoreadmin.petstore.mapper")
+@MapperScan("com.csu.petstorepro.petstore.mapper")
+public class PetstoreProApplicationTests
+{
+    public static void main(String[] args)
+    {
+        SpringApplication.run(PetstoreProApplicationTests.class, args);
     }
-
 }
