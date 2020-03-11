@@ -38,4 +38,10 @@ public class CategoryController {
     {
         return categoryService.getCategory(categoryId);
     }
+
+    @GetMapping("insertCategory")
+    public int insertCategory(Category category)
+    {
+        return categoryService.insertCategory(category);
+    }
 }

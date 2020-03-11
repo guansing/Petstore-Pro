@@ -24,5 +24,34 @@ public class CatalogTests
         System.out.println(category);
     }
 
+    @Test
+    public void deleteCategoryTest()
+    {
+        Integer result = categoryService.deleteCategory("A");
+        System.out.println(result);
+    }
+
+    @Test
+    public void updateCategoryTest()
+    {
+        Category category=new Category();
+        category.setCatid("A");
+        category.setName("BBB");
+        category.setDescn("des");
+        Integer result = categoryService.updateCategory(category);
+        System.out.println(result);
+    }
+
+    @Test
+    public void insertCategoryTest()
+    {
+        Category category=new Category();
+        category.setCatid("A11");
+        category.setName("BBB111");
+        category.setDescn("des11111111");
+        Integer result = categoryService.insertCategory(category);
+        System.out.println(result);
+    }
+
 
 }
