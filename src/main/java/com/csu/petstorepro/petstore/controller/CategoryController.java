@@ -32,4 +32,10 @@ public class CategoryController {
         //返回一个service
         return categoryService.getCategoryList();
     }
+
+    @GetMapping("findCategoryById")
+    public Category getCategory(String categoryId)
+    {
+        return categoryService.getCategory(categoryId);
+    }
 }

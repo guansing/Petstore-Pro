@@ -16,4 +16,6 @@ import java.util.List;
 public interface ICategoryService extends IService<Category> {
     //用于查找Category的所有变量值的方法接口
     List<Category> getCategoryList();
+    //通过id来查询Category的方法接口
+    Category getCategory(String categoryId);
 }

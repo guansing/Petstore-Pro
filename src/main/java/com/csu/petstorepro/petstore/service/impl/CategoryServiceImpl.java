@@ -23,9 +23,17 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Resource
     private CategoryMapper categoryMapper;
 
+    //用于查找Category的所有变量值的方法接口实现
     @Override
     public List<Category> getCategoryList(){
         //返回一个mapper映射
         return categoryMapper.selectList(null);
+    }
+
+    //通过id来查询Category的方法接口的实现
+    @Override
+    public Category getCategory(String categoryId)
+    {
+        return categoryMapper.selectById(categoryId);
     }
 }

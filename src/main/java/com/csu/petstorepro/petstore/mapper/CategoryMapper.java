@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author lgx
  * @since 2020-03-10
  */
-//默认继承BaseMapper
+//继承BaseMapper
 public interface CategoryMapper extends BaseMapper<Category> {
 
 }
