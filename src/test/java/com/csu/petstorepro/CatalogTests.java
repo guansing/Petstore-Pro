@@ -20,7 +20,7 @@ public class CatalogTests
     @Test
     public void check()
     {
-        Category category = categoryService.getCategory("FISH");
+        Category category = categoryService.getCategoryById("FISH");
         System.out.println(category);
     }
 

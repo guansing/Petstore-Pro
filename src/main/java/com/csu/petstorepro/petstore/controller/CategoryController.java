@@ -27,16 +27,17 @@ public class CategoryController {
     @Resource
     private CategoryServiceImpl categoryService;
     //映射位置
-    @GetMapping("findAll")
-    public List<Category> categoryList(){
+    @GetMapping("getCategoryList")
+    public List<Category> getCategoryList()
+    {
         //返回一个service
         return categoryService.getCategoryList();
     }
 
-    @GetMapping("findCategoryById")
-    public Category getCategory(String categoryId)
+    @GetMapping("getCategoryById")
+    public Category getCategoryById(String categoryId)
     {
-        return categoryService.getCategory(categoryId);
+        return categoryService.getCategoryById(categoryId);
     }
 
     @GetMapping("insertCategory")

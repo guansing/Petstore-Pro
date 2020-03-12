@@ -3,6 +3,8 @@ package com.csu.petstorepro.petstore.entity;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
@@ -28,5 +30,35 @@ public class Product implements Serializable {
 
     private String descn;
 
+    public String getProductid() {
+        return productid;
+    }
 
+    public void setProductid(String productid) {
+        this.productid = productid;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescn() {
+        return descn;
+    }
+
+    public void setDescn(String descn) {
+        this.descn = descn;
+    }
 }

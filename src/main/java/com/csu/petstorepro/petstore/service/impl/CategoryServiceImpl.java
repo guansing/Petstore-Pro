@@ -36,7 +36,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
     //通过id来查询Category的方法接口的实现
     @Override
-    public Category getCategory(String categoryId)
+    public Category getCategoryById(String categoryId)
     {
         return categoryMapper.selectById(categoryId);
     }

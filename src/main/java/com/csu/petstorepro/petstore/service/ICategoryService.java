@@ -19,7 +19,7 @@ public interface ICategoryService extends IService<Category> {
     //用于查找Category的所有变量值的方法接口
     List<Category> getCategoryList();
     //通过id来查询Category的方法接口
-    Category getCategory(String categoryId);
+    Category getCategoryById(String categoryId);
     //【卖家部分】对Category类别进行增加操作的方法接口
     int insertCategory(Category category);
     //【卖家部分】对Category类别进行删除操作的方法接口
