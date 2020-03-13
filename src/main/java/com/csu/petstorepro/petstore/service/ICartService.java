@@ -25,7 +25,7 @@ public interface ICartService extends IService<Cart> {
     //全删：用于提交Order订单的时候清空刚才的购物车列表（清空购物车）
     int deleteAllItemOutCart(Cart itemId);
     //全查：查询购物车的所有信息
-    List<Cart> getCartList();
+    List<Cart> getCartList(Cart cart);
     //更新指定：修改个数的数据时可以实时将数据信息存到数据库中
     int updateCart(Cart cart);
     //更新指定：判断某item是否在购物车中，有的话数量加一，没有就要新增item信息

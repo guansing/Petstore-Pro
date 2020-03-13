@@ -38,7 +38,7 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
     @Override
     public int updateItemNumberInCart(Cart cart)
     {
-        //指定调用MyBatis-Plus的更新方法(update)，该方法只适用于entity，因为update语句是需要条件和传值的
+        //指定调用MyBatis-Plus的更新方法(update)，该方法只适用于entity(实体)，因为update语句是需要条件和传值的
         return cartMapper.update
                 (
                         //userid和itemid联合主键
@@ -75,23 +75,34 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
         return cartMapper.deleteByMap(columnMap);
     }
 
+    //用于返回该用户的购物车中的所有商品
     @Override
-    public List<Cart> getCartList() {
-        return cartMapper.selectList(null);
+    public List<Cart> getCartList(Cart cart)
+    {
+        Map<String,Object> columnMap = new HashMap<>();
+        columnMap.put("userid",cart.getUserid());
+        return cartMapper.selectByMap(columnMap);
     }
 
+    //以下三个方法:updateCart， existItemInCart， getSubTotal个人认为可以在控制器中直接写逻辑
+    //用于更新购物车中的商品数量
     @Override
-    public int updateCart(Cart cart) {
+    public int updateCart(Cart cart)
+    {
         return 0;
     }
 
+    //用于判断购物车中是否存在商品
     @Override
-    public boolean existItemInCart(Cart cart) {
+    public boolean existItemInCart(Cart cart)
+    {
         return false;
     }
 
+    //用于计算购物车中一条商品的总价格
     @Override
-    public BigDecimal getSubTotal(String userId) {
+    public BigDecimal getSubTotal(String userId)
+    {
         return null;
     }
 }
