@@ -26,6 +26,7 @@ import java.util.List;
 public class CategoryController {
     @Resource
     private CategoryServiceImpl categoryService;
+
     //映射位置
     @GetMapping("getCategoryList")
     public List<Category> getCategoryList()
@@ -45,4 +46,18 @@ public class CategoryController {
     {
         return categoryService.insertCategory(category);
     }
+
+    @GetMapping("deleteCategory")
+    public int deleteCategory(String categoryId)
+    {
+        return categoryService.deleteCategory(categoryId);
+    }
+
+    @GetMapping("updateCategory")
+    public int updateCategory(Category category)
+    {
+        return categoryService.updateCategory(category);
+    }
+
+
 }

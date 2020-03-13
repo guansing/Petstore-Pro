@@ -27,7 +27,7 @@ public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
     //Category的id
-   // @TableId(value = "catid")
+    @TableId
     private String catid;
     //Category的名字
     private String name;
