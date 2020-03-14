@@ -2,9 +2,6 @@ package com.csu.petstorepro.petstore.service;
 
 import com.csu.petstorepro.petstore.entity.Cart;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.omg.PortableInterceptor.INACTIVE;
-
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -26,10 +23,13 @@ public interface ICartService extends IService<Cart> {
     int deleteAllItemOutCart(Cart itemId);
     //全查：查询购物车的所有信息
     List<Cart> getCartList(Cart cart);
+
+    //列出下面这三个方法是为了提醒这三个点要在控制器或者前端实现，所以这三个方法就不实现了，只是便于提醒这三个点要考虑到
+
     //更新指定：修改个数的数据时可以实时将数据信息存到数据库中
-    int updateCart(Cart cart);
+    //int updateCart(Cart cart);
     //更新指定：判断某item是否在购物车中，有的话数量加一，没有就要新增item信息
-    boolean existItemInCart(Cart cart);
+    //boolean existItemInCart(Cart cart);
     //更新指定：更新计算所有金额的方法
-    BigDecimal getSubTotal(String userId);
+    //BigDecimal getSubTotal(String userId);
 }

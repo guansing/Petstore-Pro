@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<!-- changes from the defaults -->
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="account" type="com.csu.petstorepro.petstore.entity.Account" />
+<!--		<typeAlias alias="category" type="com.csu.petstorepro.petstore.entity.Category" />-->
+<!--		<typeAlias alias="item" type="com.csu.petstorepro.petstore.entity.Item" />-->
+<!--		<typeAlias alias="lineItem" type="com.csu.petstorepro.petstore.entity.LineItem" />-->
+<!--		<typeAlias alias="order" type="com.csu.petstorepro.petstore.entity.Order" />-->
+<!--		<typeAlias alias="product" type="com.csu.petstorepro.petstore.entity.Product" />-->
+<!--		<typeAlias alias="sequence" type="com.csu.petstorepro.petstore.entity.Sequence" />-->
+<!--		<typeAlias alias="cart" type="com.csu.petstorepro.petstore.entity.Cart"/>-->
+<!--		<typeAlias alias="cartItem" type="com.csu.petstorepro.petstore.entity.CartItem"/>-->
+<!--		<typeAlias alias="myCart" type="com.csu.petstorepro.petstore.entity.MyCart"/>-->
+<!--		<typeAlias alias="userLog" type="com.csu.petstorepro.petstore.entity.UserLog"/>-->
+<!--		<typeAlias alias="captcha" type="com.csu.petstorepro.petstore.entity.Captcha"/>-->
+	</typeAliases>
+
+</configuration>

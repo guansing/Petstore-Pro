@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.csu.petstorepro.petstore.mapper.AccountMapper">
+<!--上面的三行是自动生成的-->
+    <!-- 在这里手动写.xml配置文件，因为MyBatis-Plus在多表这里还是主要依赖原有的MyBatis的情况的 -->
+    <select id="selectByUserId" resultType="account">
+        SELECT a.*,b.*,c.* FROM account a,signon b,profile c where a.userid=b.username and a.userid=c.userid and a.userid = #{userid}
+    </select>
+
+
+    <insert id="insertSignon" parameterType="com.csu.petstorepro.petstore.entity.Account">
+        insert into signon (PASSWORD,USERNAME)
+        values (#{password}, #{userid})
+  </insert>
+
 
 </mapper>

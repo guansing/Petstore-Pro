@@ -2,9 +2,6 @@ package com.csu.petstorepro.petstore.service;
 
 import com.csu.petstorepro.petstore.entity.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.sun.tools.javac.code.Attribute;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
 
 /**

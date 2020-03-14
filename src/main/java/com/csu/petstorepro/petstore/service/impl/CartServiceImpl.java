@@ -6,8 +6,7 @@ import com.csu.petstorepro.petstore.mapper.CartMapper;
 import com.csu.petstorepro.petstore.service.ICartService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +23,7 @@ import java.util.Map;
 public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements ICartService
 {
     //在Service中引入Mapper
+    @Resource
     private CartMapper cartMapper;
 
     //买家向自己的购物车中新增一种商品(item)
@@ -84,25 +84,26 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
         return cartMapper.selectByMap(columnMap);
     }
 
-    //以下三个方法:updateCart， existItemInCart， getSubTotal个人认为可以在控制器中直接写逻辑
+    //以下三个方法:updateCart， existItemInCart， getSubTotal个人认为可以在控制器中直接写逻辑(甚至前端部分写也应该可以实现)
+    //所以这三个方法就不实现了，只是便于提醒这三个点要考虑到
     //用于更新购物车中的商品数量
-    @Override
-    public int updateCart(Cart cart)
-    {
-        return 0;
-    }
-
-    //用于判断购物车中是否存在商品
-    @Override
-    public boolean existItemInCart(Cart cart)
-    {
-        return false;
-    }
-
-    //用于计算购物车中一条商品的总价格
-    @Override
-    public BigDecimal getSubTotal(String userId)
-    {
-        return null;
-    }
+//    @Override
+//    public int updateCart(Cart cart)
+//    {
+//        return 0;
+//    }
+//
+//    //用于判断购物车中是否存在商品
+//    @Override
+//    public boolean existItemInCart(Cart cart)
+//    {
+//        return false;
+//    }
+//
+//    //用于计算购物车中一条商品的总价格
+//    @Override
+//    public BigDecimal getSubTotal(String userId)
+//    {
+//        return null;
+//    }
 }

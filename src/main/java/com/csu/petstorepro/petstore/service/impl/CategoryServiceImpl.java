@@ -1,6 +1,5 @@
 package com.csu.petstorepro.petstore.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.csu.petstorepro.petstore.entity.Category;
 import com.csu.petstorepro.petstore.mapper.CategoryMapper;
