@@ -33,17 +33,19 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
 
 
     @Override
-    public Account getAccountByUserId(String userId) {
-        return accountMapper.selectById("userid");
+    public Account getAccountByUserId(String userId)
+    {
+        return accountMapper.getAccountByUserId(userId);
     }
 
     @Override
-    public int getAccountByUserIdAndPassword(Account account) {
-        return 0;
+    public Account getAccountByUserIdAndPassword(Account account)
+    {
+        return accountMapper.getAccountByUserIdAndPassword(account);
     }
 
     @Override
-    public int insertAccount(Account account) {
+    public void insertAccount(Account account) {
         //方法1：使用MP默认单表的mapper，或在mapper中使用注解@Insert,@Select,@Update,优点是不用写sql语句，缺点是参数需要分别传三个表实体
 //        Signon signon=new Signon();
 //        signon.setUsername(account.getUserid());
@@ -58,27 +60,16 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
 //
 //        return accountMapper.insert(account)+signonMapper.insert(signon)+profileMapper.insert(profile);
         //方法2：使用xml文件重写三个表的insert，优点是参数都是Account实体
-
-        return accountMapper.insertSignon(account);
+        accountMapper.insertAccount(account);
+        accountMapper.insertProfile(account);
+        accountMapper.insertSignon(account);
     }
 
     @Override
-    public int updateAccount(Account account) {
-        return 0;
+    public void updateAccount(Account account)
+    {
+        accountMapper.updateAccount(account);
+        accountMapper.updateProfile(account);
+        accountMapper.updateSignon(account);
     }
-
-    @Override
-    public int insertSignon(Account account) {
-        return accountMapper.insertSignon(account);
-    }
-
-    @Override
-    public Account selectByUserId(String userId) {
-        return accountMapper.selectByUserId(userId);
-    }
-
-//    @Override
-//    public List<Account> selectByMyWrapper(Wrapper<Account> accountWrapper) {
-//        return accountMapper.selectByMyWrapper(accountWrapper);
-//    }
 }

@@ -3,15 +3,60 @@
 <mapper namespace="com.csu.petstorepro.petstore.mapper.AccountMapper">
 <!--上面的三行是自动生成的-->
     <!-- 在这里手动写.xml配置文件，因为MyBatis-Plus在多表这里还是主要依赖原有的MyBatis的情况的 -->
-    <select id="selectByUserId" resultType="account">
+    <select id="getAccountByUserId" resultType="account" parameterType="string">
         SELECT a.*,b.*,c.* FROM account a,signon b,profile c where a.userid=b.username and a.userid=c.userid and a.userid = #{userid}
     </select>
 
+    <select id="getAccountByUserIdAndPassword" resultType="account" parameterType="account">
+        SELECT a.*,b.*,c.*
+        FROM account a,signon b,profile c
+        where a.userid=b.username and a.userid=c.userid and a.userid = #{userid} and b.password= #{password}
+    </select>
 
-    <insert id="insertSignon" parameterType="com.csu.petstorepro.petstore.entity.Account">
-        insert into signon (PASSWORD,USERNAME)
-        values (#{password}, #{userid})
-  </insert>
+    <insert id="insertAccount" parameterType="account">
+        INSERT INTO account(userid, email, firstname, lastname, status, addr1, addr2, city, state, zip, country, phone)
+        VALUES( #{userid}, #{email}, #{firstname}, #{lastname}, #{status}, #{addr1},  #{addr2}, #{city}, #{state}, #{zip}, #{country}, #{phone})
+    </insert>
 
+    <insert id="insertProfile" parameterType="account">
+        INSERT INTO profile (userid, langpref, favcategory, mylistopt, banneropt)
+        VALUES (#{userid}, #{langpref}, #{favcategory}, #{mylistopt}, #{banneropt})
+    </insert>
+
+    <insert id="insertSignon" parameterType="account">
+        INSERT INTO signon (PASSWORD,USERNAME)
+        VALUES (#{password}, #{userid})
+    </insert>
+
+    <update id="updateAccount" parameterType="account">
+        update account
+        set email = #{email},
+            firstname = #{firstname},
+            lastname = #{lastname},
+            status = #{status},
+            addr1 = #{addr1},
+            addr2 = #{addr2},
+            city = #{city},
+            state = #{state},
+            zip = #{zip},
+            country = #{country},
+            phone = #{phone}
+        where userid = #{userid}
+    </update>
+
+    <update id="updateProfile" parameterType="account">
+        UPDATE profile SET
+          langpref = #{langpref},
+          favcategory = #{favcategory},
+          mylistopt = #{mylistopt},
+          banneropt = #{banneropt}
+        WHERE userid = #{userid}
+    </update>
+
+    <update id="updateSignon" parameterType="account">
+        UPDATE signon SET
+          password = #{password}
+        WHERE username = #{userid}
+    </update>
 
 </mapper>

@@ -23,18 +23,9 @@ public interface IAccountService extends IService<Account>
     //查找:通过账号返回个人的全部信息【买家和卖家】
     Account getAccountByUserId(String userId);
     //查找:通过账号和密码来返回account的全部信息【买家和卖家】
-    int getAccountByUserIdAndPassword(Account account);
+    Account getAccountByUserIdAndPassword(Account account);
     //新增:用户注册的时候对个人基本信息的填写【买家和卖家】
-    int insertAccount(Account account);
+    void insertAccount(Account account);
     //更新:用户登录后在个人主页中对于自己修改后信息的保存【买家和卖家】
-    int updateAccount(Account account);
-
-
-    //List<Account> selectByMyWrapper();
-
-    //查找
-    Account selectByUserId(String userId);
-
-
-   // List<Account> selectByMyWrapper(@Param(Constants.WRAPPER) Wrapper<Account> accountWrapper);
+    void updateAccount(Account account);
 }
