@@ -28,9 +28,9 @@ public class Item implements Serializable {
 
     private String productid;
 
-    private BigDecimal listprice;
+    private Double listprice;
 
-    private BigDecimal unitcost;
+    private Double unitcost;
 
     private Integer supplier;
 

@@ -61,6 +61,4 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
        return categoryMapper.update(category, new QueryWrapper<Category>()
                         .eq("catid",category.getCatid()));
     }
-
-
 }
