@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/petstore/account")
-public class AccountController {
-
+public class AccountController
+{
+    //先用session吧
 }
