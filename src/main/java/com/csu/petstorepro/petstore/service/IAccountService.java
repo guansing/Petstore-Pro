@@ -1,14 +1,7 @@
 package com.csu.petstorepro.petstore.service;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.csu.petstorepro.petstore.entity.Account;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 /**
  * <p>

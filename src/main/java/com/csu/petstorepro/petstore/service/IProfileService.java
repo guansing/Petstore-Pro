@@ -12,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-03-10
  */
 public interface IProfileService extends IService<Profile> {
-
+    //此时的 Profile 已经在AccountMapper中集成了
 }

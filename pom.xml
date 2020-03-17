@@ -81,6 +81,14 @@
             <artifactId>freemarker</artifactId>
             <version>2.3.29</version>
         </dependency>
+
+        <!--能够使用JSONObject的依赖-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.59</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

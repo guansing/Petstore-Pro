@@ -1,9 +1,6 @@
 package com.csu.petstorepro.petstore.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.csu.petstorepro.petstore.entity.Account;
-import com.csu.petstorepro.petstore.entity.Profile;
-import com.csu.petstorepro.petstore.entity.Signon;
 import com.csu.petstorepro.petstore.mapper.AccountMapper;
 import com.csu.petstorepro.petstore.mapper.ProfileMapper;
 import com.csu.petstorepro.petstore.mapper.SignonMapper;
@@ -12,7 +9,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * <p>
