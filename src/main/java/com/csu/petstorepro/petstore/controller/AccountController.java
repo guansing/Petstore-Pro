@@ -94,16 +94,23 @@ public class AccountController
     {
         JSONObject data = new JSONObject();
         Account ac;
+        HttpSession session = request.getSession();
+        Account accountSession=(Account) session.getAttribute("account");
+        //是否登录判断
+        if (accountSession.getUserid()==null ){
+            return ReturnEntity.failedResult("请登录后访问");
+        }
+        //判断用户的userid是否已经存在
         ac = accountService.getAccountByUserIdAndPassword(account);
-
-        if (ac.getUserid() != null)
+        if (ac.getUserid() == null)
         {
+            return ReturnEntity.failedResult("当前用户已存在");
+
+        }
+        else {
             accountService.updateAccount(account);
             data.put("account",account);
             return ReturnEntity.successResult(data);
-        }
-        else {
-            return ReturnEntity.failedResult("Error");
         }
     }
 
@@ -114,7 +121,14 @@ public class AccountController
     {
         JSONObject data = new JSONObject();
         Account ac;
+        HttpSession session = request.getSession();
+        Account accountSession=(Account) session.getAttribute("account");
         ac = accountService.getAccountByUserIdAndPassword(account);
+
+        //是否登录判断
+        if (accountSession.getUserid()==null ){
+            return ReturnEntity.failedResult("请登录后访问");
+        }
 
         if (ac.getUserid() != null)
         {
