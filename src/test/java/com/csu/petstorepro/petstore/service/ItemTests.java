@@ -21,7 +21,7 @@ public class ItemTests
     @Test
     public void getItemList()
     {
-        List<Item> itemList = itemService.getItemList();
+        List<Item> itemList = itemService.getItemListByProduct("RP-SN-01");
         System.out.println(itemList);
     }
 
@@ -39,7 +39,7 @@ public class ItemTests
     {
         Item item=new Item();
 
-        item.setItemid("Aaa-a");
+        item.setItemid("Aaa-a1");
         item.setProductid("FI-SW-01");
 
         item.setListprice(11.00);
@@ -61,7 +61,7 @@ public class ItemTests
     @Test
     public void deleteItem()
     {
-        Integer result = itemService.deleteItem("Aaa-a");
+        Integer result = itemService.deleteItem("Aaa-a1");
         System.out.println(result);
     }
 
@@ -71,7 +71,7 @@ public class ItemTests
     {
         Item item=new Item();
 
-        item.setItemid("Aaa-a");
+        item.setItemid("Aaa-a1");
         item.setProductid("K9-DL-01");
 
         item.setListprice(11.0);
@@ -86,6 +86,13 @@ public class ItemTests
         item.setAttr5("test52");
 
         Integer result = itemService.updateItem(item);
+        System.out.println(result);
+    }
+
+    @Test
+    public void isItemInStock()
+    {
+        boolean result = itemService.isItemInStock("EST-1");
         System.out.println(result);
     }
 }

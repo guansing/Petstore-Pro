@@ -10,8 +10,9 @@
 	</settings>
 	<typeAliases>
 		<typeAlias alias="account" type="com.csu.petstorepro.petstore.entity.Account" />
+		<typeAlias alias="inventory" type="com.csu.petstorepro.petstore.entity.Inventory" />
+		<typeAlias alias="item" type="com.csu.petstorepro.petstore.entity.Item" />
 <!--		<typeAlias alias="category" type="com.csu.petstorepro.petstore.entity.Category" />-->
-<!--		<typeAlias alias="item" type="com.csu.petstorepro.petstore.entity.Item" />-->
 <!--		<typeAlias alias="lineItem" type="com.csu.petstorepro.petstore.entity.LineItem" />-->
 <!--		<typeAlias alias="order" type="com.csu.petstorepro.petstore.entity.Order" />-->
 <!--		<typeAlias alias="product" type="com.csu.petstorepro.petstore.entity.Product" />-->

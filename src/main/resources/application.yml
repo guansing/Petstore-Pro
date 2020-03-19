@@ -1,7 +1,6 @@
 
 spring:
   datasource:
-    #数据库连接配置
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/petstore?useSSL=false&serverTimezone=GMT%2B8
     username: root
@@ -9,7 +8,5 @@ spring:
 server:
   port: 8090
 mybatis-plus:
-    # 如果是放在src/main/java目录下 classpath:/com/*/*/mapper/*Mapper.xml
-    # 如果是放在resource目录 classpath:/mapper/**.xml
-    mapper-locations: classpath:/mapper/petstore/**.xml
-    config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:/mapper/petstore/**.xml
+  config-location: classpath:mybatis-config.xml

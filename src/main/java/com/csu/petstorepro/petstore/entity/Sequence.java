@@ -24,5 +24,10 @@ public class Sequence implements Serializable {
 
     private Integer nextid;
 
+    public Sequence(String name,int nextid)
+    {
+        this.name = name;
+        this.nextid = nextid;
+    }
 
 }

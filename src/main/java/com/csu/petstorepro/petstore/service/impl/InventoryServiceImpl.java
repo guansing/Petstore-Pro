@@ -6,6 +6,8 @@ import com.csu.petstorepro.petstore.service.IInventoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * <p>
  *  服务实现类
@@ -16,5 +18,13 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class InventoryServiceImpl extends ServiceImpl<InventoryMapper, Inventory> implements IInventoryService {
+
+    @Resource
+    private InventoryMapper inventoryMapper;
+
+    @Override
+    public void updateInventoryQuantity(Inventory inventory) {
+        inventoryMapper.updateInventoryQuantity(inventory);
+    }
 
 }

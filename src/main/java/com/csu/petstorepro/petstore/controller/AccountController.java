@@ -77,7 +77,8 @@ public class AccountController
     //用来检查用户名
     @RequestMapping(value = "/checkUsername",method = RequestMethod.GET)
     @ResponseBody
-    public ReturnEntity checkUsername(Account account,HttpServletRequest request) {
+    public ReturnEntity checkUsername(Account account,HttpServletRequest request)
+    {
         if (request.getParameter("username")!= null) {
             if (accountService.getAccountByUserId(request.getParameter("username")) != null) {
                 return ReturnEntity.failedResult("Error");
@@ -110,6 +111,7 @@ public class AccountController
         else {
             accountService.updateAccount(account);
             data.put("account",account);
+
             return ReturnEntity.successResult(data);
         }
     }

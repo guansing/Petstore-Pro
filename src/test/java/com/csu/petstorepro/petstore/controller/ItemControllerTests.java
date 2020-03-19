@@ -36,9 +36,9 @@ public class ItemControllerTests
 
     //对控制器 getItemList 方法进行测试【测试无问题】
     @Test
-    public void getItemList() throws Exception
+    public void getItemListByProduct() throws Exception
     {
-        mvc.perform(MockMvcRequestBuilders.get("/getItemList")
+        mvc.perform(MockMvcRequestBuilders.get("/getItemListByProduct?productId=RP-SN-01")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())

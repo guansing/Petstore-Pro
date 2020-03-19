@@ -2,6 +2,7 @@ package com.csu.petstorepro.petstore.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.csu.petstorepro.petstore.entity.Item;
+import com.csu.petstorepro.petstore.mapper.InventoryMapper;
 import com.csu.petstorepro.petstore.mapper.ItemMapper;
 import com.csu.petstorepro.petstore.service.IItemService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -25,10 +26,12 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements II
 {
     @Resource
     private ItemMapper itemMapper;
+    @Resource
+    private InventoryMapper inventoryMapper;
 
     @Override
-    public List<Item> getItemList() {
-        return itemMapper.selectList(null);
+    public List<Item> getItemListByProduct(String productId) {
+        return itemMapper.getItemListByProduct(productId);
     }
 
     @Override
@@ -51,5 +54,12 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements II
     @Override
     public int updateItem(Item item) {
         return itemMapper.update(item,new QueryWrapper<Item>().eq("itemid",item.getItemid()));
+    }
+
+
+    //判断是否有库存
+    @Override
+    public boolean isItemInStock(String itemId) {
+        return inventoryMapper.selectById(itemId).getQty() > 0;
     }
 }

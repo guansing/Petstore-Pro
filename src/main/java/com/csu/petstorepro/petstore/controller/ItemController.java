@@ -1,5 +1,7 @@
 package com.csu.petstorepro.petstore.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.csu.petstorepro.petstore.common.ReturnEntity;
 import com.csu.petstorepro.petstore.entity.Item;
 import com.csu.petstorepro.petstore.service.impl.ItemServiceImpl;
 import org.springframework.web.bind.annotation.*;
@@ -21,40 +23,64 @@ public class ItemController {
     private ItemServiceImpl itemService;
 
     //映射位置
-    @RequestMapping(value = "/getItemList",method = RequestMethod.GET)
+    @RequestMapping(value = "/getItemListByProduct",method = RequestMethod.GET)
     @ResponseBody
-    public List<Item> getItemList()
+    public ReturnEntity getItemListByProduct(String productId)
     {
         //返回一个service
-        return itemService.getItemList();
+        JSONObject data = new JSONObject();
+
+        List<Item> itemList = itemService.getItemListByProduct(productId);
+        data.put("itemList",itemList);
+        return ReturnEntity.successResult(data);
     }
+
 
     @RequestMapping(value = "/getItemById",method = RequestMethod.GET)
     @ResponseBody
-    public Item getItemById(String itemId)
+    public ReturnEntity getItemById(String itemId)
     {
-        return itemService.getItemById(itemId);
+        JSONObject data = new JSONObject();
+
+        Item item = itemService.getItemById(itemId);
+        data.put("item",item);
+        return ReturnEntity.successResult(data);
     }
+
+
 
     @RequestMapping(value = "/insertItem",method = RequestMethod.POST)
     @ResponseBody
     //参数中的@RequestBody注解，主要用来接收前端传递给后端的 json 字符串中的数据，并按字段名称装配给 item 实体类
-    public int insertItem(@RequestBody Item item)
+    public ReturnEntity insertItem(@RequestBody Item item)
     {
-        return itemService.insertItem(item);
+        JSONObject data = new JSONObject();
+
+        int result = itemService.insertItem(item);
+        data.put("result",result);
+        return ReturnEntity.successResult(data);
     }
+
 
     @RequestMapping(value = "/deleteItem",method = RequestMethod.POST)
     @ResponseBody
-    public int deleteItem(@RequestBody Item item)
+    public ReturnEntity deleteItem(@RequestBody String itemId)
     {
-        return itemService.deleteItem(item.getItemid());
+        JSONObject data = new JSONObject();
+
+        int result = itemService.deleteItem(itemId);
+        data.put("result",result);
+        return ReturnEntity.successResult(data);
     }
 
     @RequestMapping(value = "/updateItem",method = RequestMethod.POST)
     @ResponseBody
-    public int updateCategory(@RequestBody Item item)
+    public ReturnEntity updateItem(@RequestBody Item item)
     {
-        return itemService.updateItem(item);
+        JSONObject data = new JSONObject();
+
+        int result = itemService.updateItem(item);
+        data.put("result",result);
+        return ReturnEntity.successResult(data);
     }
 }

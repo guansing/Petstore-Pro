@@ -42,7 +42,8 @@ public class ReturnEntity {
         return new ReturnEntity(true, "", data);
     }
 
-    public static ReturnEntity failedResult(String message) {
+    public static ReturnEntity failedResult(String message)
+    {
         return new ReturnEntity(false, message, null);
     }
 }

@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface IItemService extends IService<Item> {
     //用于查找Item的所有变量值的方法接口
-    List<Item> getItemList();
+    List<Item> getItemListByProduct(String productId);
     //通过id来查询Item的方法接口
     Item getItemById(String itemId);
     //【卖家部分】对Item类别进行增加操作的方法接口
@@ -25,4 +25,6 @@ public interface IItemService extends IService<Item> {
     int deleteItem(String itemId);
     //【卖家部分】对Item类别进行修改操作的方法接口
     int updateItem(Item item);
+
+    boolean isItemInStock(String itemId);
 }

@@ -33,7 +33,7 @@ public class Cart implements Serializable {
 
     private Integer quantity;
 
-    private BigDecimal listprice;
+    private Double listprice;
 
-    private BigDecimal total;
+    private Double total;
 }

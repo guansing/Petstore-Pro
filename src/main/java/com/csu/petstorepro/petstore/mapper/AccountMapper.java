@@ -44,7 +44,4 @@ public interface AccountMapper extends BaseMapper<Account> {
     void updateAccount(Account account);
     void updateProfile(Account account);
     void updateSignon(Account account);
-
-
-
 }
