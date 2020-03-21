@@ -1,6 +1,9 @@
 package com.csu.petstorepro.petstore.controller;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.csu.petstorepro.petstore.common.ReturnEntity;
 import com.csu.petstorepro.petstore.entity.Category;
 import com.csu.petstorepro.petstore.service.impl.CategoryServiceImpl;
 import org.springframework.web.bind.annotation.*;
@@ -27,38 +30,52 @@ public class CategoryController {
     //映射位置
     @RequestMapping(value = "/getCategoryList",method = RequestMethod.GET)
     @ResponseBody
-    public List<Category> getCategoryList()
+    public ReturnEntity getCategoryList()
     {
-        //返回一个service
-        return categoryService.getCategoryList();
+        JSONObject data = new JSONObject();
+        List<Category> categoryList = categoryService.getCategoryList();
+        data.put("categoryList",categoryList);
+        return ReturnEntity.successResult(data);
     }
 
     @RequestMapping(value = "/getCategoryById",method = RequestMethod.GET)
     @ResponseBody
-    public Category getCategoryById(String categoryId)
+    public ReturnEntity getCategoryById(String categoryId)
     {
-        return categoryService.getCategoryById(categoryId);
+        JSONObject data = new JSONObject();
+        Category category = categoryService.getCategoryById(categoryId);
+        data.put("category",category);
+        return ReturnEntity.successResult(data);
     }
 
     @RequestMapping(value = "/insertCategory",method = RequestMethod.POST)
     @ResponseBody
     //参数中的@RequestBody注解，主要用来接收前端传递给后端的json字符串中的数据，并按字段名称装配给category实体类
-    public int insertCategory(@RequestBody Category category)
+    public ReturnEntity insertCategory(@RequestBody Category category)
     {
-        return categoryService.insertCategory(category);
+        JSONObject data = new JSONObject();
+        int result = categoryService.insertCategory(category);
+        data.put("result",result);
+        return ReturnEntity.successResult(data);
     }
 
     @RequestMapping(value = "/deleteCategory",method = RequestMethod.POST)
     @ResponseBody
-    public int deleteCategory(@RequestBody Category category)
+    public ReturnEntity deleteCategory(@RequestBody Category category)
     {
-        return categoryService.deleteCategory(category.getCatid());
+        JSONObject data = new JSONObject();
+        int result = categoryService.deleteCategory(category.getCatid());
+        data.put("result",result);
+        return ReturnEntity.successResult(data);
     }
 
     @RequestMapping(value = "/updateCategory",method = RequestMethod.POST)
     @ResponseBody
-    public int updateCategory(@RequestBody Category category)
+    public ReturnEntity updateCategory(@RequestBody Category category)
     {
-        return categoryService.updateCategory(category);
+        JSONObject data = new JSONObject();
+        int result = categoryService.updateCategory(category);
+        data.put("result",result);
+        return ReturnEntity.successResult(data);
     }
 }

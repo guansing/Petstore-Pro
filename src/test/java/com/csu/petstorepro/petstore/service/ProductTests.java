@@ -21,7 +21,7 @@ public class ProductTests
     @Test
     public void getProductList()
     {
-        List<Product> productList = productService.getProductList();
+        List<Product> productList = productService.getProductListByCategory("FISH");
         System.out.println(productList);
     }
 
@@ -31,6 +31,12 @@ public class ProductTests
     {
         Product product = productService.getProductById("AV-CB-01");
         System.out.println(product);
+    }
+
+    @Test
+    public void searchProductList(){
+        List<Product> productList = productService.searchProductList("A");
+        System.out.println(productList);
     }
 
     //对insertProduct方法进行测试【测试无问题】

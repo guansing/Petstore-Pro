@@ -36,9 +36,9 @@ public class ProductControllerTests
 
     //对控制器 getProductList 方法进行测试【测试无问题】
     @Test
-    public void getProductList() throws Exception
+    public void getProductListByCategory() throws Exception
     {
-        mvc.perform(MockMvcRequestBuilders.get("/getProductList")
+        mvc.perform(MockMvcRequestBuilders.get("/getProductListByCategory?categoryId=FISH")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -52,6 +52,16 @@ public class ProductControllerTests
         Product product = new Product();
         product.setProductid("a");
         mvc.perform(MockMvcRequestBuilders.get("/getProductById?productId=a")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void searchProductList() throws Exception
+    {
+        mvc.perform(MockMvcRequestBuilders.get("/searchProductList?name=A")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())

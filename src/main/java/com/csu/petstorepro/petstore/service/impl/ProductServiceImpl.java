@@ -1,6 +1,7 @@
 package com.csu.petstorepro.petstore.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.csu.petstorepro.petstore.entity.Category;
 import com.csu.petstorepro.petstore.entity.Product;
 import com.csu.petstorepro.petstore.mapper.ProductMapper;
 import com.csu.petstorepro.petstore.service.IProductService;
@@ -27,15 +28,21 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     private ProductMapper productMapper;
 
     @Override
-    public List<Product> getProductList()
+    public List<Product> getProductListByCategory(String categoryId)
     {
-        return productMapper.selectList(null);
+        return productMapper.selectList(new QueryWrapper<Product>().eq("category",categoryId));
     }
 
     @Override
     public Product getProductById(String productId) {
         return productMapper.selectById(productId);
     }
+
+    @Override
+    public List<Product> searchProductList(String name) {
+        return productMapper.selectList(new QueryWrapper<Product>().like("name",name));
+    }
+
 
     @Override
     public int insertProduct(Product product) {
