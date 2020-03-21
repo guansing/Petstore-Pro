@@ -58,7 +58,31 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Override
     public int updateCategory(Category category)
     {
+        //此方法修改category下面的所有有数据的列
        return categoryMapper.update(category, new QueryWrapper<Category>()
                         .eq("catid",category.getCatid()));
+
+
+            //方法1：适合单主键情况
+            //return categoryMapper.updateById(category);
+
+            //方法2：适合多主键情况，但update的时候主键会被重复更新一次，但不影响结果
+            //Map<String,Object> columnMap = new HashMap<>();
+            //columnMap.put("catid",category.getCatid());
+            //columnMap.put("name",category.getName());
+            //return categoryMapper.update(columnMap)
+
+            //方法3：适合多主键情况,update的时候不会重复更新主键列
+            //Category category1=new Category();
+            //BeanUtils.copyProperties(category, category1);
+            //category1.setCatid(null);
+            //category1.setName(null);
+            //return categoryMapper.update(category1,
+            //       new QueryWrapper<Category>()
+            //                .eq("catid",category.getCatid())
+            //                .eq("name",category.getName())
+            // );
+            //}
+
     }
 }

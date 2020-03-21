@@ -32,6 +32,7 @@ public class CategoryControllerTests
     public void setupMock()
     {
         mvc = MockMvcBuilders.webAppContextSetup(wac).build();
+
     }
 
     //对控制器getCategoryList方法进行测试【测试无问题】

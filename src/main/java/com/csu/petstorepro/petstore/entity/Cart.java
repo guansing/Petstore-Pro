@@ -31,7 +31,7 @@ public class Cart implements Serializable {
 
     private Boolean instock;
 
-    private Integer quantity;
+    private int quantity;
 
     private Double listprice;
 

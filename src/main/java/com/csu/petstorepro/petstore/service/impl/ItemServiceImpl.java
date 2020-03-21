@@ -57,9 +57,5 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements II
     }
 
 
-    //判断是否有库存
-    @Override
-    public boolean isItemInStock(String itemId) {
-        return inventoryMapper.selectById(itemId).getQty() > 0;
-    }
+
 }

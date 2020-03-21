@@ -26,5 +26,5 @@ public interface IItemService extends IService<Item> {
     //【卖家部分】对Item类别进行修改操作的方法接口
     int updateItem(Item item);
 
-    boolean isItemInStock(String itemId);
+
 }

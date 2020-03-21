@@ -12,7 +12,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ItemTests
+public class ItemServiceTests
 {
     @Resource
     private ItemServiceImpl itemService;
@@ -89,12 +89,12 @@ public class ItemTests
         System.out.println(result);
     }
 
-    @Test
-    public void isItemInStock()
-    {
-        boolean result = itemService.isItemInStock("EST-1");
-        System.out.println(result);
-    }
+//    @Test
+//    public void isItemInStock()
+//    {
+//        boolean result = itemService.isItemInStock("EST-1");
+//        System.out.println(result);
+//    }
 
 
 
