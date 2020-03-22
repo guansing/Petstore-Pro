@@ -31,7 +31,10 @@ public class ProductControllerTests
     @Before
     public void setupMock()
     {
-        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
+        mvc = MockMvcBuilders.webAppContextSetup(wac).addFilter(((request, response, chain) -> {
+            response.setCharacterEncoding("UTF-8");
+            chain.doFilter(request, response);
+        })).build();
     }
 
     //对控制器 getProductList 方法进行测试【测试无问题】

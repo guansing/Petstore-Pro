@@ -35,8 +35,11 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
     }
 
     @Override
-    public Account getAccountByUserIdAndPassword(Account account)
+    public Account getAccountByUserIdAndPassword(String userId,String password)
     {
+        Account account = new Account();
+        account.setUserid(userId);
+        account.setPassword(password);
         return accountMapper.getAccountByUserIdAndPassword(account);
     }
 

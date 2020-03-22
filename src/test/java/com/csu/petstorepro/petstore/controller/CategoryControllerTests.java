@@ -31,7 +31,10 @@ public class CategoryControllerTests
     @Before
     public void setupMock()
     {
-        mvc = MockMvcBuilders.webAppContextSetup(wac).build();
+        mvc = MockMvcBuilders.webAppContextSetup(wac).addFilter(((request, response, chain) -> {
+            response.setCharacterEncoding("UTF-8");
+            chain.doFilter(request, response);
+        })).build();
 
     }
 

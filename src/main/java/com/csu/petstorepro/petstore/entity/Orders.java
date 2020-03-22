@@ -26,6 +26,7 @@ public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
     //order table
+    @TableId
     private int orderid; //原来类型为 Integer
     private String userid;
     private Date orderdate; //原来类型为 LocalDate

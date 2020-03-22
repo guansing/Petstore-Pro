@@ -19,9 +19,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -122,11 +119,8 @@ public class CartControllerTests {
 
         mvc.perform(MockMvcRequestBuilders.post("/updateCart")
                 .contentType(MediaType.APPLICATION_JSON)
-
                 .content(json)
                 .session(session))
-
-
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }
