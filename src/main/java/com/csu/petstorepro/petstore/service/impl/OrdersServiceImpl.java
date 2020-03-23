@@ -1,13 +1,7 @@
 package com.csu.petstorepro.petstore.service.impl;
 
-import com.csu.petstorepro.petstore.entity.Cart;
-import com.csu.petstorepro.petstore.entity.Lineitem;
-import com.csu.petstorepro.petstore.entity.Orders;
-import com.csu.petstorepro.petstore.entity.Sequence;
-import com.csu.petstorepro.petstore.mapper.CartMapper;
-import com.csu.petstorepro.petstore.mapper.LineitemMapper;
-import com.csu.petstorepro.petstore.mapper.OrdersMapper;
-import com.csu.petstorepro.petstore.mapper.SequenceMapper;
+import com.csu.petstorepro.petstore.entity.*;
+import com.csu.petstorepro.petstore.mapper.*;
 import com.csu.petstorepro.petstore.service.IOrdersService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +9,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,52 +29,65 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     @Resource
     private OrdersMapper ordersMapper;
     @Resource
+    private OrderstatusMapper orderstatusMapper;
+    @Resource
     private CartMapper cartMapper;
     @Resource
     private SequenceMapper sequenceMapper;
     @Resource
     private CartServiceImpl cartService;
     @Resource
-    private LineitemMapper line;
+    private LineitemMapper lineitemMapper;
+    @Resource
+    private InventoryMapper inventoryMapper;
+    @Resource
+    private AccountMapper accountMapper;
 
     @Override
-    public int insertOrder(Orders order)
+    public void insertOrder(Orders order)
     {
         int orderId = getNextId("ordernum");
         order.setOrderid(orderId);
         order.setTotalprice(cartMapper.getSubTotal(order.getUserid()));
         List<Cart> cartList = cartService.getCartList(order.getUserid());
-        List<Lineitem> lineitemList = new ArrayList<>();
 
         for (int i = 0;i < cartList.size();i++) {
+            //插入LineItem
             Lineitem lineitem = new Lineitem();
             lineitem.setOrderid(orderId);
-            lineitem.setLinenum(i);
+            lineitem.setLinenum(i+1);
             lineitem.setItemid(cartList.get(i).getItemid());
             lineitem.setQuantity(cartList.get(i).getQuantity());
-            //lineitem.setUnitprice(cartList.get(i).getListprice());
-            lineitemList.add(lineitem);
-            line.insert(lineitem);
+            lineitem.setUnitprice(cartList.get(i).getListprice());
+            lineitemMapper.insert(lineitem);
+
+            //insertOrderStatus 方法
+            Orderstatus orderstatus = new Orderstatus();
+            orderstatus.setOrderid(orderId);
+            orderstatus.setLinenum(i+1);
+            orderstatus.setTimestamp(LocalDate.now());
+            orderstatus.setStatus(accountMapper.getAccountByUserId(order.getUserid()).getStatus());
+            orderstatusMapper.insert(orderstatus);
 
             //更新库存数量
-
+            Inventory inventory = new Inventory();
+            inventory.setItemid(cartList.get(i).getItemid());
+            inventory.setQty(cartList.get(i).getQuantity());
+            inventoryMapper.updateInventoryQuantity(inventory);
         }
         ordersMapper.insert(order);
-        //insertOrderStatus 方法
         cartService.deleteAllItemOutCart(order.getUserid());
-        return orderId; //这个返回值？？？
+
     }
 
     @Override
-    public Orders getOrderByOrderId(String orderId) {
-        return ordersMapper.selectById(orderId);
+    public Orders getOrderByOrderId(int orderId) {
+        return ordersMapper.getOrderByOrderId(orderId);
     }
 
     @Override
     public List<Orders> getOrdersByUserId(String userId) {
-        Map<String,Object> columnMap = new HashMap<>();
-        columnMap.put("userid",userId);
-        return ordersMapper.selectByMap(columnMap);
+        return ordersMapper.getOrdersByUserId(userId);
     }
 
     @Override
@@ -99,10 +107,5 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
             sequenceMapper.updateById(updateSequence);
             return nextId;
         }
-    }
-
-    @Override
-    public int insertOrderStatus(Orders orders) {
-        return 0;
     }
 }

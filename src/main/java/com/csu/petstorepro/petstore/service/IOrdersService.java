@@ -18,13 +18,9 @@ import java.util.List;
  */
 public interface IOrdersService extends IService<Orders> {
     //新增订单
-    int insertOrder(Orders order);
+    void insertOrder(Orders order);
     List<Orders> getOrdersByUserId(String userId);
-    Orders getOrderByOrderId(String orderId);
+    Orders getOrderByOrderId(int orderId);
     //获取序列表sequence中新的id序列值
     int getNextId(String name);
-
-
-    //将订单(order)的状态添加到数据库中
-    int insertOrderStatus(Orders orders);
 }

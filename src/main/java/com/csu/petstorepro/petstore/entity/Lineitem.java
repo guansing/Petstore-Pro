@@ -29,7 +29,7 @@ public class Lineitem implements Serializable {
 
     private Integer quantity;
 
-    private BigDecimal unitprice;
+    private double unitprice;
 
 
 }
