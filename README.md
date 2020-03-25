@@ -7,7 +7,7 @@
 | Spring Boot  | 容器+MVC框架     | https://spring.io/projects/spring-boot |      |
 | MyBatis-Plus | ORM框架          | https://mp.baomidou.com/               |      |
 | MySQL        | 数据库表         | https://www.mysql.com/                 |      |
-| JWT          | JWT登录支持      | https://jwt.io/                        |      |
+| MockMVC          | 测试用      |                        |      |
 | Lombok       | 简化对象封装工具 | https://projectlombok.org/             |      |
 
 | 日期      | 项目进度                                 | 出现的问题或者心得                                           |
