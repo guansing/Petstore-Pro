@@ -94,9 +94,9 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     public int getNextId(String name) {
         Sequence sequence = sequenceMapper.selectById(name);
         if (sequence == null){
-            Sequence insertSequence = new Sequence();
-            insertSequence.setName(name);
-            insertSequence.setNextid(1);
+            Sequence insertSequence = new Sequence(name,1);
+            //insertSequence.setName(name);
+            //insertSequence.setNextid(1);
             sequenceMapper.insert(insertSequence);
             return 1;
         }else {

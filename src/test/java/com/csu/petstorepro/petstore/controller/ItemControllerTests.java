@@ -67,7 +67,7 @@ public class ItemControllerTests
     {
         Item item = new Item();
 
-        item.setItemid("Bbb-b");
+        item.setItemid("Bbb-b3");
         item.setProductid("FL-DLH-02");
         item.setListprice(1.0);
         item.setUnitcost(1.0);

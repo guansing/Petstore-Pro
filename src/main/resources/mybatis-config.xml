@@ -14,10 +14,10 @@
 		<typeAlias alias="item" type="com.csu.petstorepro.petstore.entity.Item" />
 <!--		<typeAlias alias="category" type="com.csu.petstorepro.petstore.entity.Category" />-->
 <!--		<typeAlias alias="lineItem" type="com.csu.petstorepro.petstore.entity.LineItem" />-->
-<!--		<typeAlias alias="order" type="com.csu.petstorepro.petstore.entity.Order" />-->
+		<typeAlias alias="orders" type="com.csu.petstorepro.petstore.entity.Orders" />
 <!--		<typeAlias alias="product" type="com.csu.petstorepro.petstore.entity.Product" />-->
 <!--		<typeAlias alias="sequence" type="com.csu.petstorepro.petstore.entity.Sequence" />-->
-<!--		<typeAlias alias="cart" type="com.csu.petstorepro.petstore.entity.Cart"/>-->
+		<typeAlias alias="cart" type="com.csu.petstorepro.petstore.entity.Cart"/>
 <!--		<typeAlias alias="cartItem" type="com.csu.petstorepro.petstore.entity.CartItem"/>-->
 <!--		<typeAlias alias="myCart" type="com.csu.petstorepro.petstore.entity.MyCart"/>-->
 <!--		<typeAlias alias="userLog" type="com.csu.petstorepro.petstore.entity.UserLog"/>-->

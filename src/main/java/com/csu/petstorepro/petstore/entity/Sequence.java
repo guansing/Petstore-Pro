@@ -29,5 +29,6 @@ public class Sequence implements Serializable {
         this.name = name;
         this.nextid = nextid;
     }
-
+    public Sequence() {
+    }
 }

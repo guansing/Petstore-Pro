@@ -88,14 +88,4 @@ public class ItemServiceTests
         Integer result = itemService.updateItem(item);
         System.out.println(result);
     }
-
-//    @Test
-//    public void isItemInStock()
-//    {
-//        boolean result = itemService.isItemInStock("EST-1");
-//        System.out.println(result);
-//    }
-
-
-
 }

@@ -79,7 +79,7 @@ public class CartControllerTests {
     @Test
     public void insertTheItemToCart() throws Exception{
         Cart cart = new Cart();
-        cart.setUserid("22");
+        cart.setUserid("221");
         cart.setItemid("EST-10");
         cart.setProductid("22");
         cart.setName("22");

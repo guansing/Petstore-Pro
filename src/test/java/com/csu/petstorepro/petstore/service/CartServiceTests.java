@@ -70,7 +70,7 @@ public class CartServiceTests {
 
     @Test
     public void deleteAllItemOutCart(){
-        int result = cartService.deleteAllItemOutCart("1");
+        int result = cartService.deleteAllItemOutCart("11");
         System.out.println(result);
     }
 
