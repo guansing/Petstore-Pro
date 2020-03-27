@@ -3,16 +3,19 @@ package com.csu.petstorepro.petstore.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.csu.petstorepro.petstore.common.ReturnEntity;
+import com.csu.petstorepro.petstore.entity.Account;
 import com.csu.petstorepro.petstore.entity.Cart;
 import com.csu.petstorepro.petstore.entity.Orders;
 import com.csu.petstorepro.petstore.service.impl.AccountServiceImpl;
 import com.csu.petstorepro.petstore.service.impl.CartServiceImpl;
 import com.csu.petstorepro.petstore.service.impl.OrdersServiceImpl;
+import org.apache.catalina.Session;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * <p>
@@ -33,20 +36,76 @@ public class OrdersController {
     @Resource
     private HttpServletRequest request;
 
-    @RequestMapping(value = "/insertTheItemToCart",method = RequestMethod.POST)
+    @RequestMapping(value = "/newOrders",method = RequestMethod.POST)
     @ResponseBody
-    public ReturnEntity newOrder(@RequestBody Orders orders){
+    public ReturnEntity newOrders(@RequestBody Orders orders){
         JSONObject data = new JSONObject();
-//
-//        String username = accountService.getAccountByUserId(data)
-//
-//
-//        HttpSession session = request.getSession();
-//        ordersService.insertOrder(orders);
-//        cartService.deleteAllItemOutCart(username)
-        return ReturnEntity.successResult(data);
+        HttpSession session = request.getSession();
 
+        Account accountSession=(Account) session.getAttribute("account");
+        cartService.getCartList(accountSession.getUserid());
+
+        if(orders.getShiptofirstname() == null){
+            orders.setShiptofirstname(orders.getBilltofirstname());
+            orders.setShiptolastname(orders.getBilltolastname());
+            orders.setShipaddr1(orders.getBilladdr1());
+            orders.setShipaddr2(orders.getBilladdr2());
+            orders.setShipcity(orders.getBillcity());
+            orders.setShipstate(orders.getBillstate());
+            orders.setShipzip(orders.getBillzip());
+            orders.setShipcountry(orders.getBillcountry());
+        }
+        ordersService.insertOrder(orders);
+        cartService.deleteAllItemOutCart(accountSession.getUserid());
+
+        data.put("orders",orders);
+        return ReturnEntity.successResult(data);
     }
+
+
+
+    @RequestMapping(value = "/getOrders",method = RequestMethod.GET)
+    @ResponseBody
+    public ReturnEntity getOrdersByUser(String userId)
+    {
+        JSONObject data = new JSONObject();
+        HttpSession session = request.getSession();
+
+        Account accountSession=(Account) session.getAttribute("account");
+        //是否登录判断
+        if (accountSession==null ){
+            return ReturnEntity.failedResult("请登录后访问");
+        }else {
+            List<Orders> result = ordersService.getOrdersByUserId(userId);
+            data.put("result",result);
+            return ReturnEntity.successResult(data);
+        }
+    }
+
+
+    @RequestMapping(value = "/getOrdersByOrderId",method = RequestMethod.GET)
+    @ResponseBody
+    public ReturnEntity getOrdersByOrderId(int orderId)
+    {
+        JSONObject data = new JSONObject();
+        HttpSession session = request.getSession();
+
+        Account accountSession=(Account) session.getAttribute("account");
+        //是否登录判断
+        if (accountSession==null ){
+            return ReturnEntity.failedResult("请登录后访问");
+        }else {
+                Orders orders = ordersService.getOrderByOrderId(orderId);
+
+                if (!orders.getUserid().equals(orderId)){
+                    return ReturnEntity.failedResult("用户无法访问");
+                }
+                data.put("result",orders);
+                return ReturnEntity.successResult(data);
+        }
+    }
+
+
 
 
 }
