@@ -64,7 +64,7 @@ public class OrdersController {
 
 
 
-    @RequestMapping(value = "/getOrders",method = RequestMethod.GET)
+    @RequestMapping(value = "/getOrdersByUser",method = RequestMethod.GET)
     @ResponseBody
     public ReturnEntity getOrdersByUser(String userId)
     {
@@ -96,14 +96,35 @@ public class OrdersController {
             return ReturnEntity.failedResult("请登录后访问");
         }else {
                 Orders orders = ordersService.getOrderByOrderId(orderId);
-
-                if (!orders.getUserid().equals(orderId)){
+                if (orders==null){
                     return ReturnEntity.failedResult("用户无法访问");
                 }
                 data.put("result",orders);
                 return ReturnEntity.successResult(data);
         }
     }
+
+
+
+    //在打开创建新订单界面的时候开始执行初始化操作
+    @RequestMapping(value = "/getOrderInit",method = RequestMethod.GET)
+    @ResponseBody
+    public ReturnEntity getOrderInit(){
+        JSONObject data = new JSONObject();
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+
+        if (account == null){
+            return ReturnEntity.failedResult("请登录后访问");
+        }
+
+        Orders orders = new Orders();
+        Orders result = orders.initOrder(account);
+        data.put("result",result);
+        return ReturnEntity.successResult(data);
+    }
+
+
 
 
 

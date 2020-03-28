@@ -34,7 +34,7 @@ public class CartServiceTests {
     @Test
     public void insertTheItemToCart(){
         Cart cart = new Cart();
-        cart.setUserid("2");
+        cart.setUserid("22");
         cart.setItemid("EST-10");
         cart.setProductid("3");
         cart.setName("3");

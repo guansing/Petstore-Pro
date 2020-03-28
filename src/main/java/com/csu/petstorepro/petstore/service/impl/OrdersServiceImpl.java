@@ -9,11 +9,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -48,6 +46,9 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     {
         int orderId = getNextId("ordernum");
         order.setOrderid(orderId);
+
+        order.setOrderdate(new Date());
+
         order.setTotalprice(cartMapper.getSubTotal(order.getUserid()));
         List<Cart> cartList = cartService.getCartList(order.getUserid());
 
@@ -65,6 +66,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
             Orderstatus orderstatus = new Orderstatus();
             orderstatus.setOrderid(orderId);
             orderstatus.setLinenum(i+1);
+            orderstatus.setStatus("P"); //写死的
             orderstatus.setTimestamp(LocalDate.now());
             orderstatus.setStatus(accountMapper.getAccountByUserId(order.getUserid()).getStatus());
             orderstatusMapper.insert(orderstatus);
@@ -75,7 +77,9 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
             inventory.setQty(cartList.get(i).getQuantity());
             inventoryMapper.updateInventoryQuantity(inventory);
         }
+
         ordersMapper.insert(order);
+
         cartService.deleteAllItemOutCart(order.getUserid());
 
     }
@@ -92,11 +96,10 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
 
     @Override
     public int getNextId(String name) {
+
         Sequence sequence = sequenceMapper.selectById(name);
         if (sequence == null){
             Sequence insertSequence = new Sequence(name,1);
-            //insertSequence.setName(name);
-            //insertSequence.setNextid(1);
             sequenceMapper.insert(insertSequence);
             return 1;
         }else {

@@ -53,5 +53,36 @@ public class Orders implements Serializable {
     private String cardtype;
     private String locale;
 
+    public Orders initOrder(Account account) {
 
+        Orders orders = new Orders();
+        orders.userid = account.getUserid();
+        orders.orderdate = new Date();
+
+        orders.shiptofirstname = account.getFirstname();
+        orders.shiptolastname = account.getLastname();
+        orders.shipaddr1 = account.getAddr1();
+        orders.shipaddr2 = account.getAddr2();
+        orders.shipcity = account.getCity();
+        orders.shipstate = account.getState();
+        orders.shipzip = account.getZip();
+        orders.shipcountry = account.getCountry();
+
+        orders.billtofirstname = account.getFirstname();
+        orders.billtolastname = account.getLastname();
+        orders.billaddr1 = account.getAddr1();
+        orders.billaddr2 = account.getAddr2();
+        orders.billcity = account.getCity();
+        orders.billstate = account.getState();
+        orders.billzip = account.getZip();
+        orders.billcountry = account.getCountry();
+
+        orders.creditcard = "999 9999 9999 9999";
+        orders.exprdate = "12/03";
+        orders.cardtype = "Visa";
+        orders.courier = "UPS";
+        orders.locale = "CA";
+
+        return orders;
+    }
 }

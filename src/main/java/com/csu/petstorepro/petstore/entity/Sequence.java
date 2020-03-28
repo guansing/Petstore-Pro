@@ -1,6 +1,8 @@
 package com.csu.petstorepro.petstore.entity;
 
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -20,6 +22,7 @@ public class Sequence implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @TableId
     private String name;
 
     private Integer nextid;
