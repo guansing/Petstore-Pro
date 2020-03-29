@@ -1,6 +1,7 @@
 package com.csu.petstorepro.petstore.controller;
 
 import com.csu.petstorepro.petstore.entity.Item;
+import com.csu.petstorepro.petstore.entity.Supplier;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +28,6 @@ public class ItemControllerTests
     private MockMvc mvc;
     private MockHttpSession session;
 
-    //起到一个初始化 MockMVC 的作用
     @Before
     public void setupMock()
     {
@@ -35,6 +35,10 @@ public class ItemControllerTests
             response.setCharacterEncoding("UTF-8");
             chain.doFilter(request, response);
         })).build();
+        session = new MockHttpSession();
+        Supplier supplier = new Supplier();
+        supplier.setSuppid("4");
+        session.setAttribute("supplier",supplier);
     }
 
     //对控制器 getItemList 方法进行测试【测试无问题】
@@ -67,7 +71,7 @@ public class ItemControllerTests
     {
         Item item = new Item();
 
-        item.setItemid("Bbb-b3");
+        item.setItemid("Bbb-b311");
         item.setProductid("FL-DLH-02");
         item.setListprice(1.0);
         item.setUnitcost(1.0);
@@ -84,7 +88,8 @@ public class ItemControllerTests
 
         mvc.perform(MockMvcRequestBuilders.post("/insertItem")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(json))
+                .content(json)
+                .session(session))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }
@@ -94,7 +99,7 @@ public class ItemControllerTests
     public void updateItem() throws Exception {
         Item item = new Item();
 
-        item.setItemid("Bbb-b");
+        item.setItemid("aa");
         item.setProductid("FL-DLH-02");
         item.setListprice(12.0);
         item.setUnitcost(12.0);
@@ -111,7 +116,8 @@ public class ItemControllerTests
         //修改url测试
         mvc.perform(MockMvcRequestBuilders.post("/updateItem")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(json))
+                .content(json)
+                .session(session))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }
@@ -120,13 +126,25 @@ public class ItemControllerTests
     @Test
     public void deleteItem() throws Exception {
         Item item = new Item();
-        item.setItemid("Bbb-b");
+        item.setItemid("Bbb-b311");
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(item);
+        //String json="{\"itemId\":\"Bbb-b311\"}";
         //修改url测试
         mvc.perform(MockMvcRequestBuilders.post("/deleteItem")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(json))
+                .content(json)
+                .session(session))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void getItemListBySupplierId() throws Exception
+    {
+        mvc.perform(MockMvcRequestBuilders.get("/getItemListBySupplierId?supplierId=2")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }

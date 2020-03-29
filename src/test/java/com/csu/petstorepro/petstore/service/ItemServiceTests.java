@@ -88,4 +88,13 @@ public class ItemServiceTests
         Integer result = itemService.updateItem(item);
         System.out.println(result);
     }
+
+    //测试无问题
+    @Test
+    public void getItemListBySupplierId()
+    {
+        List<Item> itemList = itemService.getItemListBySupplierId("1");
+        System.out.println(itemList);
+    }
+
 }

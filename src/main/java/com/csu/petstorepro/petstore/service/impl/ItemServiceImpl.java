@@ -43,7 +43,8 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements II
     }
 
     @Override
-    public int insertItem(Item item) {
+    public int insertItem(Item item)
+    {
         return itemMapper.insert(item);
     }
 
@@ -63,7 +64,7 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements II
     @Override
     public List<Item> getItemListBySupplierId(String supplierId)
     {
-        return itemMapper.getItemListByProduct(supplierId);
+        return itemMapper.getItemListBySupplierId(supplierId);
     }
 
 

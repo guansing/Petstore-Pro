@@ -99,7 +99,7 @@ public class SupplierController {
     public ReturnEntity updateSupplierInfo(@RequestBody Supplier supplier)
     {
         JSONObject data = new JSONObject();
-        Supplier ac;
+
         HttpSession session = request.getSession();
         Supplier supplierSession=(Supplier) session.getAttribute("supplier");
         //是否登录判断

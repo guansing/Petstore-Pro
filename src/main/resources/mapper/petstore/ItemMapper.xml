@@ -13,9 +13,6 @@
         WHERE P.PRODUCTID = I.PRODUCTID AND  I.ITEMID = V.ITEMID AND I.ITEMID = #{itemId}
     </select>
 
-
-
-
     <select id="getItemListBySupplierId" resultType="item" parameterType="string">
         SELECT a.*,b.*
         FROM item a,supplier b
