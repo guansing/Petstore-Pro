@@ -9,7 +9,7 @@
 | MyBatis-Plus | ORM框架插件      | https://mp.baomidou.com/                 |      |
 | MySQL        | 数据库表         | https://www.mysql.com/                   |      |
 | Lombok       | 简化对象封装工具 | https://projectlombok.org/               |      |
-| fastjson     | JWT登录支持      | https://github.com/alibaba/fastjson/wiki |      |
+| fastjson     | JSON框架      | https://github.com/alibaba/fastjson/wiki |      |
 | druid        | 数据库连接池     | https://github.com/alibaba/druid/wiki    |      |
 
 **项目后端整体进度**
