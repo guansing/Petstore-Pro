@@ -1,7 +1,7 @@
 package com.csu.petstorepro.petstore.controller;
 
 import com.csu.petstorepro.petstore.entity.Account;
-import com.csu.petstorepro.petstore.entity.Cart;
+import com.csu.petstorepro.petstore.entity.Supplier;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +23,7 @@ import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class AccountControllerTests {
+public class SupplierControllerTests {
     @Autowired
     private WebApplicationContext wac;
     private MockMvc mvc;
@@ -32,28 +32,27 @@ public class AccountControllerTests {
     @Before
     public void setupMock()
     {
-        //mvc = MockMvcBuilders.webAppContextSetup(wac).build();
         mvc = MockMvcBuilders.webAppContextSetup(wac).addFilter(((request, response, chain) -> {
             response.setCharacterEncoding("UTF-8");
             chain.doFilter(request, response);
         })).build();
         session = new MockHttpSession();
-        Account account=new Account();
-        account.setUserid("2");
-        session.setAttribute("account",account); //拦截器那边会判断用户是否登录，所以这里注入一个用户
+        Supplier supplier = new Supplier();
+        supplier.setSuppid("1");
+        session.setAttribute("supplier",supplier);
     }
 
     @Test
-    public void signIn() throws Exception
+    public void signSupplierIn() throws Exception
     {
         Map<String,String> map=new HashMap<>();
-        map.put("userId","222");
-        map.put("password","2223334");
+        map.put("suppid","1");
+        map.put("password","123456");
 
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(map);
 
-        mvc.perform(MockMvcRequestBuilders.post("/signIn")
+        mvc.perform(MockMvcRequestBuilders.post("/signSupplierIn")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json)
                 .session(session))
@@ -62,119 +61,92 @@ public class AccountControllerTests {
     }
 
     @Test
-    public void signUp() throws Exception{
-        Account account = new Account();
-
-        account.setUserid("666");
-        account.setEmail("666");
-        account.setFirstname("777");
-        account.setLastname("888");
-        account.setStatus("OK");
-        account.setAddr1("jjj");
-        account.setAddr2("lll");
-        account.setCity("Tokyo");
-        account.setState("WWF");
-        account.setZip("zero");
-        account.setCountry("Japan");
-        account.setPhone("1530080");
-
-        account.setPassword("999");
-
-        account.setLangpref("chinese");
-        account.setFavcategory("fish");
-        account.setMylistopt(2);
-        account.setBanneropt(3);
-
-
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(account);
-
-        mvc.perform(MockMvcRequestBuilders.post("/signUp")
-                .contentType(MediaType.APPLICATION_JSON)
-
-                .content(json)
-                .session(session))
-
-
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    public void updateUserInfo() throws Exception{
-        Account account = new Account();
-
-        //账号不能更改
-        account.setUserid("666");
-
-        account.setEmail("666");
-        account.setFirstname("777");
-        account.setLastname("888");
-        account.setStatus("OK");
-        account.setAddr1("jjj2");
-        account.setAddr2("lll2");
-        account.setCity("Tokyo");
-        account.setState("WWF");
-        account.setZip("zero");
-        account.setCountry("Japan");
-        account.setPhone("1530080");
-
-        //密码不能更改
-        account.setPassword("999");
-
-        account.setLangpref("chinese6");
-        account.setFavcategory("fish");
-        account.setMylistopt(2);
-        account.setBanneropt(3);
-
-
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(account);
-
-        mvc.perform(MockMvcRequestBuilders.post("/updateUserInfo")
-                .contentType(MediaType.APPLICATION_JSON)
-
-                .content(json)
-                .session(session))
-
-
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    public void getUserInfo() throws Exception
+    public void signSupplierOut() throws Exception
     {
-        Account account = new Account();
-        account.setUserid("222");
+        mvc.perform(MockMvcRequestBuilders.post("/signSupplierOut")
+                .contentType(MediaType.APPLICATION_JSON)
+                .session(session))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void signSupplierUp() throws Exception{
+        Supplier supplier = new Supplier();
+
+        supplier.setSuppid("5");
+        supplier.setName("51");
+        supplier.setStatus("11");
+        supplier.setAddr1("21");
+        supplier.setAddr2("31");
+        supplier.setCity("41");
+        supplier.setState("yes1");
+        supplier.setZip("71");
+        supplier.setPhone("81");
+
+        supplier.setPassword("91");
 
         ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(account);
-        mvc.perform(MockMvcRequestBuilders.get("/getUserInfo")
+        String json = mapper.writeValueAsString(supplier);
+
+        mvc.perform(MockMvcRequestBuilders.post("/signSupplierUp")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json)
+                .session(session))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void checkSupplierUsername() throws Exception
+    {
+        mvc.perform(MockMvcRequestBuilders.get("/checkSupplierUsername?supplierId=1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .session(session))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void updateSupplierInfo() throws Exception{
+        Supplier supplier = new Supplier();
+
+        supplier.setSuppid("5");
+        supplier.setName("512");
+        supplier.setStatus("2");
+        supplier.setAddr1("212");
+        supplier.setAddr2("312");
+        supplier.setCity("412");
+        supplier.setState("yes12");
+        supplier.setZip("712");
+        supplier.setPhone("812");
+
+        supplier.setPassword("912");
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(supplier);
+
+        mvc.perform(MockMvcRequestBuilders.post("/updateSupplierInfo")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json)
+                .session(session))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
+    @Test
+    public void getSupplierInfo() throws Exception
+    {
+        Supplier supplier = new Supplier();
+        supplier.setSuppid("5");
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(supplier);
+        mvc.perform(MockMvcRequestBuilders.get("/getSupplierInfo")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(json)
-                .session(session))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    public void signOut() throws Exception
-    {
-        mvc.perform(MockMvcRequestBuilders.post("/signOut")
-                .contentType(MediaType.APPLICATION_JSON)
-                .session(session))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andDo(MockMvcResultHandlers.print());
-    }
-
-    @Test
-    public void checkUsername() throws Exception
-    {
-        mvc.perform(MockMvcRequestBuilders.get("/checkUsername?userId=22112")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
                 .session(session))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());

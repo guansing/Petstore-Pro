@@ -22,6 +22,7 @@
 <!--		<typeAlias alias="myCart" type="com.csu.petstorepro.petstore.entity.MyCart"/>-->
 <!--		<typeAlias alias="userLog" type="com.csu.petstorepro.petstore.entity.UserLog"/>-->
 <!--		<typeAlias alias="captcha" type="com.csu.petstorepro.petstore.entity.Captcha"/>-->
+		<typeAlias alias="supplier" type="com.csu.petstorepro.petstore.entity.Supplier" />
 	</typeAliases>
 
 </configuration>

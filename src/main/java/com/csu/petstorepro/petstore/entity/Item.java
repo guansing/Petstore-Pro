@@ -32,7 +32,7 @@ public class Item implements Serializable {
 
     private Double unitcost;
 
-    private Integer supplier;
+    private String supplier;
 
     private String status;
 

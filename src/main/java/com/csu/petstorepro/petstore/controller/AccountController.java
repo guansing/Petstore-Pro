@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.csu.petstorepro.petstore.common.ReturnEntity;
 import com.csu.petstorepro.petstore.entity.Account;
+import com.csu.petstorepro.petstore.entity.Signon;
 import com.csu.petstorepro.petstore.service.impl.AccountServiceImpl;
+import com.csu.petstorepro.petstore.service.impl.SignonServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -26,6 +28,8 @@ public class AccountController
 {
     @Resource
     private AccountServiceImpl accountService;
+    @Resource
+    private SignonServiceImpl signonService;
     @Resource
     private HttpServletRequest request;
 
@@ -69,9 +73,9 @@ public class AccountController
         JSONObject data = new JSONObject();
         String username = account.getUserid();
 
-        Account dbAccount = accountService.getAccountByUserId(username);
+        Signon signon = signonService.checkUsername(username);
 
-        if(dbAccount != null)
+        if(signon != null)
         {
             return ReturnEntity.failedResult("用户名已存在");
         }
@@ -88,13 +92,12 @@ public class AccountController
     @ResponseBody
     public ReturnEntity checkUsername(String userId)
     {
-        Account account = accountService.getAccountByUserId(userId);
-        if (account == null){
+        Signon signon = signonService.checkUsername(userId);
+        if (signon == null){
             return ReturnEntity.successResult(true);
         }else {
             return ReturnEntity.failedResult("用户名已存在");
         }
-
     }
 
     @RequestMapping(value = "updateUserInfo",method = RequestMethod.POST)
@@ -102,26 +105,18 @@ public class AccountController
     public ReturnEntity updateUserInfo(@RequestBody Account account)
     {
         JSONObject data = new JSONObject();
-        Account ac;
         HttpSession session = request.getSession();
         Account accountSession=(Account) session.getAttribute("account");
         //是否登录判断
-        if (accountSession.getUserid()==null ){
+        if (accountSession==null ){
             return ReturnEntity.failedResult("请登录后访问");
-        }
-        //判断用户的userid是否已经存在
-        ac = accountService.getAccountByUserIdAndPassword(account.getUserid(),account.getPassword());
-        if (ac.getUserid() == null)
-        {
-            return ReturnEntity.failedResult("当前用户已存在");
+          }
+        accountService.updateAccount(account);
+        session.setAttribute("account",account);
 
-        }
-        else {
-            accountService.updateAccount(account);
-            data.put("account",account);
+        data.put("account",account);
 
-            return ReturnEntity.successResult(data);
-        }
+        return ReturnEntity.successResult(data);
     }
 
     @RequestMapping(value = "getUserInfo",method = RequestMethod.GET)
@@ -129,25 +124,19 @@ public class AccountController
     public ReturnEntity getUserInfo(@RequestBody Account account)
     {
         JSONObject data = new JSONObject();
-        Account ac;
+
         HttpSession session = request.getSession();
         Account accountSession=(Account) session.getAttribute("account");
-        ac = accountService.getAccountByUserIdAndPassword(account.getUserid(),account.getPassword());
-
         //是否登录判断
-        if (accountSession.getUserid()==null ){
+        if (accountSession ==null ){
             return ReturnEntity.failedResult("请登录后访问");
         }
 
-        if (ac.getUserid() != null)
-        {
-            accountService.getAccountByUserIdAndPassword(account.getUserid(),account.getPassword());
-            data.put("account",account);
-            return ReturnEntity.successResult(data);
-        }
-        else {
-            return ReturnEntity.failedResult("Error");
-        }
+        Account result = accountService.getAccountByUserId(account.getUserid());
+
+
+        data.put("account",result);
+        return ReturnEntity.successResult(data);
     }
 
 

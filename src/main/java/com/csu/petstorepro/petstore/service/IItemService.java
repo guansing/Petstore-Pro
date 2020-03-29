@@ -1,6 +1,5 @@
 package com.csu.petstorepro.petstore.service;
 
-import com.csu.petstorepro.petstore.entity.Category;
 import com.csu.petstorepro.petstore.entity.Item;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -26,5 +25,7 @@ public interface IItemService extends IService<Item> {
     //【卖家部分】对Item类别进行修改操作的方法接口
     int updateItem(Item item);
 
+    //卖家的查询部分，即通过supplierId来看到对应的Item
+    List<Item> getItemListBySupplierId(String supplierId);
 
 }

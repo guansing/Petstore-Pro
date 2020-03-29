@@ -45,7 +45,7 @@ public class ItemServiceTests
         item.setListprice(11.00);
         item.setUnitcost(13.4);
 
-        item.setSupplier(1);
+        item.setSupplier("1");
         item.setStatus("S");
         item.setAttr1("test1");
         item.setAttr2("test2");
@@ -77,7 +77,7 @@ public class ItemServiceTests
         item.setListprice(11.0);
         item.setUnitcost(12.0);
 
-        item.setSupplier(1);
+        item.setSupplier("1");
         item.setStatus("S2");
         item.setAttr1("test12");
         item.setAttr2("test22");

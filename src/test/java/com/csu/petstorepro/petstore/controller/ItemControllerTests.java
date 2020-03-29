@@ -71,7 +71,7 @@ public class ItemControllerTests
         item.setProductid("FL-DLH-02");
         item.setListprice(1.0);
         item.setUnitcost(1.0);
-        item.setSupplier(1);
+        item.setSupplier("1");
         item.setStatus("S3");
         item.setAttr1("test13");
         item.setAttr2("test23");
@@ -98,7 +98,7 @@ public class ItemControllerTests
         item.setProductid("FL-DLH-02");
         item.setListprice(12.0);
         item.setUnitcost(12.0);
-        item.setSupplier(2);
+        item.setSupplier("2");
         item.setStatus("T2");
         item.setAttr1("test132");
         item.setAttr2("test232");

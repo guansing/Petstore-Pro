@@ -2,6 +2,7 @@ package com.csu.petstorepro.petstore.entity;
 
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,7 +24,7 @@ public class Supplier implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId
-    private Integer suppid;
+    private String suppid;
 
     private String name;
 
@@ -41,5 +42,7 @@ public class Supplier implements Serializable {
 
     private String phone;
 
+    @TableField(exist = false)
+    private String password;
 
 }

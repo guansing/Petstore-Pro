@@ -18,4 +18,7 @@ public interface ItemMapper extends BaseMapper<Item> {
     List<Item> getItemListByProduct(String productId);
     //通过具体的一个itemId来获取到某一个对应的item
     Item getItem(String itemId);
+
+    //卖家查询他自己的item
+    List<Item> getItemListBySupplierId(String supplierId);
 }

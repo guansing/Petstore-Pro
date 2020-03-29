@@ -1,6 +1,7 @@
 package com.csu.petstorepro.petstore.service.impl;
 
 import com.csu.petstorepro.petstore.entity.Account;
+import com.csu.petstorepro.petstore.entity.Signon;
 import com.csu.petstorepro.petstore.mapper.AccountMapper;
 import com.csu.petstorepro.petstore.mapper.ProfileMapper;
 import com.csu.petstorepro.petstore.mapper.SignonMapper;
@@ -21,12 +22,9 @@ import javax.annotation.Resource;
 @Service
 public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> implements IAccountService
 {
-    //引入三个Mapper
+    //引入Mapper
     @Resource
     private AccountMapper accountMapper;
-    private SignonMapper signonMapper;
-    private ProfileMapper profileMapper;
-
 
     @Override
     public Account getAccountByUserId(String userId)

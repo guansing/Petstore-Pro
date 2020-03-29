@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.csu.petstorepro.petstore.entity.Item;
 import com.csu.petstorepro.petstore.mapper.InventoryMapper;
 import com.csu.petstorepro.petstore.mapper.ItemMapper;
+import com.csu.petstorepro.petstore.mapper.SupplierMapper;
 import com.csu.petstorepro.petstore.service.IItemService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,8 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements II
     private ItemMapper itemMapper;
     @Resource
     private InventoryMapper inventoryMapper;
+    @Resource
+    private SupplierMapper supplierMapper;
 
     @Override
     public List<Item> getItemListByProduct(String productId) {
@@ -56,6 +59,12 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements II
         return itemMapper.update(item,new QueryWrapper<Item>().eq("itemid",item.getItemid()));
     }
 
+    //卖家的查询部分，即通过supplierId来看到对应的Item
+    @Override
+    public List<Item> getItemListBySupplierId(String supplierId)
+    {
+        return itemMapper.getItemListByProduct(supplierId);
+    }
 
 
 }

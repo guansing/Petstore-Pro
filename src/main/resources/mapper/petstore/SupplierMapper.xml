@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.csu.petstorepro.petstore.mapper.SupplierMapper">
+    <select id="getSupplierBySuppId" resultType="supplier" parameterType="string">
+        SELECT a.*,b.* FROM supplier a,signon b where a.suppid =b.username and a.suppid = #{supplierId}
+    </select>
 
+    <select id="getSupplierBySuppIdAndPassword" resultType="supplier" parameterType="supplier">
+        SELECT a.*,b.*
+        FROM supplier a,signon b
+        where a.suppid=b.username and a.suppid = #{suppid} and b.password= #{password}
+    </select>
+
+    <insert id="insertSupplier" parameterType="supplier">
+        INSERT INTO supplier(suppid, name, status, addr1, addr2, city, state, zip,phone)
+        VALUES( #{suppid},#{name}, #{status}, #{addr1},  #{addr2}, #{city}, #{state}, #{zip}, #{phone})
+    </insert>
+
+    <insert id="insertSignon" parameterType="supplier">
+        INSERT INTO signon (PASSWORD,USERNAME)
+        VALUES (#{password}, #{suppid})
+    </insert>
+
+    <update id="updateSupplier" parameterType="supplier">
+        update supplier
+        set name = #{name},
+            status = #{status},
+            addr1 = #{addr1},
+            addr2 = #{addr2},
+            city = #{city},
+            state = #{state},
+            zip = #{zip},
+            phone = #{phone}
+        where suppid = #{suppid}
+    </update>
+
+    <update id="updateSignon" parameterType="supplier">
+        UPDATE signon SET
+          password = #{password}
+        WHERE username = #{suppid}
+    </update>
 </mapper>
