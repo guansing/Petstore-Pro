@@ -32,7 +32,7 @@
   - [x] Item
     - [x] 卖家对Item进行增删改的操作
     - [x] 卖家查看自己的商品
-  - [x] Supplier
+  - [x] Supplier 
   - [ ] ReceiveOrders【预计新增加这一个表】
 
 
