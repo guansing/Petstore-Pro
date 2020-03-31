@@ -23,4 +23,6 @@ public interface IOrdersService extends IService<Orders> {
     Orders getOrderByOrderId(int orderId);
     //获取序列表sequence中新的id序列值
     int getNextId(String name);
+    //卖家条件查询orders
+    List<Orders> getSupplierOrders(String suppid);
 }

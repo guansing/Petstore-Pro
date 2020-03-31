@@ -6,6 +6,7 @@ import com.csu.petstorepro.petstore.common.ReturnEntity;
 import com.csu.petstorepro.petstore.entity.Account;
 import com.csu.petstorepro.petstore.entity.Cart;
 import com.csu.petstorepro.petstore.entity.Orders;
+import com.csu.petstorepro.petstore.entity.Supplier;
 import com.csu.petstorepro.petstore.service.impl.AccountServiceImpl;
 import com.csu.petstorepro.petstore.service.impl.CartServiceImpl;
 import com.csu.petstorepro.petstore.service.impl.OrdersServiceImpl;
@@ -127,6 +128,22 @@ public class OrdersController {
 
 
 
+    @RequestMapping(value = "/getSupplierOrders",method = RequestMethod.GET)
+    @ResponseBody
+    public ReturnEntity getSupplierOrders(String suppid)
+    {
+        JSONObject data = new JSONObject();
+        HttpSession session = request.getSession();
 
+        Supplier supplierSession=(Supplier) session.getAttribute("supplier");
+        //是否登录判断
+        if (supplierSession==null ){
+            return ReturnEntity.failedResult("请卖家登录后访问");
+        }else {
+            List<Orders> result = ordersService.getSupplierOrders(suppid);
+            data.put("result",result);
+            return ReturnEntity.successResult(data);
+        }
+    }
 
 }

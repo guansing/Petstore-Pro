@@ -16,4 +16,8 @@ import java.util.Map;
 public interface IInventoryService extends IService<Inventory> {
     //更新库存数量
     void updateInventoryQuantity(Inventory inventory);
+
+    int updateQtyBySupplier(Inventory inventory);
+
+    Inventory getQtyBySupplier(String itemid);
 }

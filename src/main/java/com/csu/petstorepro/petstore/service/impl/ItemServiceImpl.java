@@ -1,6 +1,7 @@
 package com.csu.petstorepro.petstore.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.csu.petstorepro.petstore.entity.Inventory;
 import com.csu.petstorepro.petstore.entity.Item;
 import com.csu.petstorepro.petstore.mapper.InventoryMapper;
 import com.csu.petstorepro.petstore.mapper.ItemMapper;
@@ -45,6 +46,12 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements II
     @Override
     public int insertItem(Item item)
     {
+        //在inventoryMapper层调用insert方法将itemid和qty赋值，其中qty赋值为0，
+        //在inventory的service层调用mapper的时候，此时的qty就为0了
+        Inventory inventory = new Inventory();
+        inventory.setItemid(item.getItemid());
+        inventory.setQty(0);
+        inventoryMapper.insert(inventory);
         return itemMapper.insert(item);
     }
 

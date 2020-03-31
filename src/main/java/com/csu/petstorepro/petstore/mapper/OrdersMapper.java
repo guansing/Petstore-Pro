@@ -19,4 +19,6 @@ public interface OrdersMapper extends BaseMapper<Orders>
     List<Orders> getOrdersByUserId(String userId);
     //通过某一个orderId来查找相对应的order信息
     Orders getOrderByOrderId(int orderId);
+    //卖家条件查询orders
+    List<Orders> getSupplierOrders(String suppid);
 }

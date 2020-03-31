@@ -14,9 +14,9 @@
     </select>
 
     <select id="getItemListBySupplierId" resultType="item" parameterType="string">
-        SELECT a.*,b.*
-        FROM item a,supplier b
-        where a.supplier=b.suppid and b.suppid = #{suppid}
+        SELECT a.*,b.name AS suppname,c.name AS productname
+        FROM item a,supplier b,product c
+        WHERE a.supplier=b.suppid AND a.`productid`=c.`productid` AND b.suppid = #{suppid}
     </select>
 
 

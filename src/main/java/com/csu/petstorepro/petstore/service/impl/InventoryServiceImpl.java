@@ -27,4 +27,14 @@ public class InventoryServiceImpl extends ServiceImpl<InventoryMapper, Inventory
         inventoryMapper.updateInventoryQuantity(inventory);
     }
 
+    @Override
+    public int updateQtyBySupplier(Inventory inventory) {
+        return inventoryMapper.updateById(inventory);
+    }
+
+    @Override
+    public Inventory getQtyBySupplier(String itemid) {
+        return inventoryMapper.selectById(itemid);
+    }
+
 }

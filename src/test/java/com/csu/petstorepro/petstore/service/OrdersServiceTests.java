@@ -75,4 +75,11 @@ public class OrdersServiceTests
         int nextId = ordersService.getNextId("ordernum");
         System.out.println(nextId);
     }
+
+    //无问题
+    @Test
+    public void getSupplierOrders(){
+        List<Orders> orders = ordersService.getSupplierOrders("4");
+        System.out.println(orders);
+    }
 }

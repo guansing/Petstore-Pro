@@ -16,4 +16,10 @@
         order by orderdate
     </select>
 
+    <select id="getSupplierOrders" parameterType="string" resultType="orders">
+        SELECT a.*
+        FROM orders a,lineitem b,item c
+        WHERE a.orderid=b.orderid AND b.itemid=c.itemid AND c.supplier = #{suppid}
+    </select>
+
 </mapper>

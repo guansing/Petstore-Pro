@@ -4,6 +4,7 @@ package com.csu.petstorepro.petstore.controller;
 import com.csu.petstorepro.petstore.entity.Account;
 import com.csu.petstorepro.petstore.entity.Cart;
 import com.csu.petstorepro.petstore.entity.Orders;
+import com.csu.petstorepro.petstore.entity.Supplier;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,6 +39,7 @@ public class OrdersControllerTests {
             chain.doFilter(request, response);
         })).build();
         session = new MockHttpSession();
+        //建立account类
         Account account=new Account();
         account.setUserid("22");
         account.setEmail("666");
@@ -51,8 +53,28 @@ public class OrdersControllerTests {
         account.setZip("zero");
         account.setCountry("Japan");
         account.setPhone("1530080");
+        //建立supplier类
+        Supplier supplier = new Supplier();
+        supplier.setSuppid("4");
+
+        //分别设置两个session
         session.setAttribute("account",account); //拦截器那边会判断用户是否登录，所以这里注入一个用户
+        session.setAttribute("supplier",supplier);
     }
+
+
+    @Test
+    public void getSupplierOrders() throws Exception
+    {
+
+        mvc.perform(MockMvcRequestBuilders.get("/getSupplierOrders?suppid=4")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .session(session))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+    }
+
 
 
     //测试无问题
@@ -101,9 +123,6 @@ public class OrdersControllerTests {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }
-
-
-
 
 
     @Test

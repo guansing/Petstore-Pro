@@ -111,4 +111,11 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
             return nextId;
         }
     }
+
+
+
+    @Override
+    public List<Orders> getSupplierOrders(String suppid) {
+        return ordersMapper.getSupplierOrders(suppid);
+    }
 }
