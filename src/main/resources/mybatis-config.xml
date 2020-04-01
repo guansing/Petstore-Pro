@@ -5,24 +5,16 @@
 
 <configuration>
 	<settings>
-		<!-- changes from the defaults -->
 		<setting name="lazyLoadingEnabled" value="false" />
 	</settings>
 	<typeAliases>
 		<typeAlias alias="account" type="com.csu.petstorepro.petstore.entity.Account" />
 		<typeAlias alias="inventory" type="com.csu.petstorepro.petstore.entity.Inventory" />
 		<typeAlias alias="item" type="com.csu.petstorepro.petstore.entity.Item" />
-<!--		<typeAlias alias="category" type="com.csu.petstorepro.petstore.entity.Category" />-->
-<!--		<typeAlias alias="lineItem" type="com.csu.petstorepro.petstore.entity.LineItem" />-->
 		<typeAlias alias="orders" type="com.csu.petstorepro.petstore.entity.Orders" />
-<!--		<typeAlias alias="product" type="com.csu.petstorepro.petstore.entity.Product" />-->
-<!--		<typeAlias alias="sequence" type="com.csu.petstorepro.petstore.entity.Sequence" />-->
 		<typeAlias alias="cart" type="com.csu.petstorepro.petstore.entity.Cart"/>
-<!--		<typeAlias alias="cartItem" type="com.csu.petstorepro.petstore.entity.CartItem"/>-->
-<!--		<typeAlias alias="myCart" type="com.csu.petstorepro.petstore.entity.MyCart"/>-->
-<!--		<typeAlias alias="userLog" type="com.csu.petstorepro.petstore.entity.UserLog"/>-->
-<!--		<typeAlias alias="captcha" type="com.csu.petstorepro.petstore.entity.Captcha"/>-->
 		<typeAlias alias="supplier" type="com.csu.petstorepro.petstore.entity.Supplier" />
+		<typeAlias alias="Syslog" type="com.csu.petstorepro.petstore.entity.Syslog"/>
 	</typeAliases>
 
 </configuration>

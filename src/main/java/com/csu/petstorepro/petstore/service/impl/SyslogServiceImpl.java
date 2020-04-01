@@ -6,6 +6,8 @@ import com.csu.petstorepro.petstore.service.ISyslogService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * <p>
  *  服务实现类
@@ -17,4 +19,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class SyslogServiceImpl extends ServiceImpl<SyslogMapper, Syslog> implements ISyslogService {
 
+    @Resource
+    private SyslogMapper syslogMapper;
+
+    @Override
+    public void insertSyslog(Syslog syslog) {
+        syslogMapper.insertSyslog(syslog);
+    }
 }

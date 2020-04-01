@@ -2,10 +2,12 @@ package com.csu.petstorepro.petstore.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.csu.petstorepro.petstore.common.GetIp;
 import com.csu.petstorepro.petstore.common.ReturnEntity;
 import com.csu.petstorepro.petstore.entity.Account;
 import com.csu.petstorepro.petstore.entity.Cart;
 import com.csu.petstorepro.petstore.entity.Item;
+import com.csu.petstorepro.petstore.entity.Syslog;
 import com.csu.petstorepro.petstore.service.impl.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,10 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +41,12 @@ public class CartController {
     CategoryServiceImpl categoryService;
     @Resource
     ProductServiceImpl productService;
+
+    //用于记录日志
+    @Resource
+    SyslogServiceImpl syslogService;
+
+
 
     @Resource
     private HttpServletRequest request;
@@ -70,7 +82,7 @@ public class CartController {
     @RequestMapping(value = "/deleteTheItemOutCart",method = RequestMethod.POST)
     @ResponseBody
     //多参数需要使用map
-    public ReturnEntity deleteTheItemOutCart(@RequestBody Map<String,String> map)
+    public ReturnEntity deleteTheItemOutCart(@RequestBody Map<String,String> map) throws Exception
     {
         JSONObject data = new JSONObject();
         HttpSession session = request.getSession();
@@ -84,14 +96,19 @@ public class CartController {
             List<Cart> cartList = cartService.getCartList(map.get("userid"));
             data.put("result",result);
             data.put("cartList",cartList);
+
+
+            //日志功能
+            Syslog syslog = new Syslog(accountSession.getUserid(),"清空购物车","deleteTheItemOutCart","cartList",new Date(),new GetIp().getIp());
+            syslogService.insertSyslog(syslog);
+
             return ReturnEntity.successResult(data);
         }
     }
 
     @RequestMapping(value = "/insertTheItemToCart",method = RequestMethod.POST)
     @ResponseBody
-    public ReturnEntity insertTheItemToCart(@RequestBody Cart cart)
-    {
+    public ReturnEntity insertTheItemToCart(@RequestBody Cart cart) throws Exception {
         JSONObject data = new JSONObject();
         HttpSession session = request.getSession();
 
@@ -105,11 +122,16 @@ public class CartController {
             List<Cart> cartList = cartService.getCartList(cart.getUserid());
             data.put("result",result);
             data.put("cartList",cartList);
+
+            //日志功能
+            Syslog syslog = new Syslog(accountSession.getUserid(),"添加"+cart.getItemid() + "商品到购物车","insertTheItemToCart","item",new Date(),new GetIp().getIp());
+            syslogService.insertSyslog(syslog);
+
             return ReturnEntity.successResult(data);
         }
     }
 
-    /**
+    /**InetAddress.getLocalHost().getHostAddress()
      * 最开始定义JSON
      * 首先通过session验证用户身份，通过用户名来返回购物车中的item
      * 然后判断购物车中是否已经含有itemId为xxx的item商品，如果没有就先判断库存中有没有商品的存量（库存inventory可以被卖家所修改）
@@ -120,7 +142,7 @@ public class CartController {
      */
     @RequestMapping(value = "/updateCart",method = RequestMethod.POST)
     @ResponseBody
-    public ReturnEntity updateCart(@RequestBody Cart cart)
+    public ReturnEntity updateCart(@RequestBody Cart cart) throws Exception
     {
         JSONObject data = new JSONObject();
         HttpSession session = request.getSession();
@@ -141,6 +163,10 @@ public class CartController {
                 //若数量大于1，数据库中若有则数量更新；若无则新增cart
                 Cart cartItem = cartService.getCartItem(cart.getUserid(),cart.getItemid());
                 if (cartItem == null){
+                    //日志功能
+                    Syslog syslog = new Syslog(accountSession.getUserid(),"添加"+cart.getItemid() + "商品到购物车","insertTheItemToCart","item",new Date(),new GetIp().getIp());
+                    syslogService.insertSyslog(syslog);
+
                     result = cartService.insertTheItemToCart(cart);
                 }else {
                     result = String.valueOf(cartService.updateItemNumberInCart(cart));

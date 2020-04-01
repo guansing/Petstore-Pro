@@ -12,5 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-03-10
  */
 public interface SyslogMapper extends BaseMapper<Syslog> {
+    //对日志信息进行插入操作
+    void insertSyslog(Syslog syslog);
 
 }
