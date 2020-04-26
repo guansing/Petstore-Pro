@@ -29,11 +29,11 @@
     - [x] ~~卖家对Category进行增删改的操作~~
   - [x] Product
     - [x] ~~卖家对Product进行增删改的操作~~
-  - [x] Item
-    - [x] 卖家对Item进行增删改的操作
-    - [x] 卖家查看自己的商品
-  - [x] Supplier 
-  - [ ] ReceiveOrders【预计新增加这一个表】
+  - [ ] Item
+    - [ ] 卖家对Item进行增删改的操作
+    - [ ] 卖家查看自己的商品
+  - [ ] Supplier 
+
 
 
 
